@@ -1,0 +1,25 @@
+{
+  "name": "iconfont-maker-cli",
+  "version": "0.0.1",
+  "description": "This is a cli tool base on iconfont-maker",
+  "main": "./bin/iconfont.js",
+  "bin": {
+    "iconfont": "./bin/iconfont.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "iconfont",
+    "maker",
+    "cli"
+  ],
+  "author": "Kat5ura",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "commander": "^2.11.0",
+    "iconfont-maker": "0.0.1",
+    "inquirer": "^3.3.0"
+  }
+}
