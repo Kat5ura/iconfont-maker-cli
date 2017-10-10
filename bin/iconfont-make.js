@@ -12,18 +12,24 @@ let cwd = process.cwd();
 
 program
     .usage('[from] [to]')
-    .description('Make your own iconfonts')
+    .description('Make your own IconFont from svg icons')
     .option('-c, --config <c>', 'Use a config file')
 	.option('-n, --font-name <n>', 'Specify a custom font name')
-	.option('-s, --css', 'Generate css file', cssProcessor)
+	.option('-s, --css', 'Generate css file, true by default', cssProcessor)
 	.option('-d, --css-dest <d>', 'Specify a custom destination for css file')
-	.option('-h, --html', 'Generate an html file for test', htmlProcessor)
+	.option('-H, --html', 'Generate an html file for test', htmlProcessor)
 	.option('-D, --html-dest <d>', 'Specify a custom destination for html file')
-	.option('-t, --types <t>', 'Font types to generate', typeProcessor)
+	.option('-t, --types <t>', 'Font types to generate, default is [woff2, woff, eot]', typeProcessor)
     .arguments('[from] [to]')
     .action(function (from, to, opts) {
-	    let sourceFiles = path.resolve(cwd, from);
+    	console.log(chalk.grey('Starting...'));
+	    let sourceFiles = from ? path.resolve(cwd, from) : '';
 	    let targetDir = to ? path.resolve(cwd, to) : '';
+
+	    if(!sourceFiles || !targetDir) {
+		    console.log(chalk.red('Invalid source or target'));
+		    return;
+	    }
 
 	    let fontName = opts.fontName || 'iconfont';
 	    let css = opts.css === undefined || opts.css;
@@ -93,11 +99,13 @@ program
 
 	    Object.keys(options).forEach(key => {
 	    	if(options[key] === undefined){
-	    		delete options[key]
+	    		delete options[key];
 		    }
 	    });
 
-	    maker(options);
+	    maker(options, err => {
+	    	if(!err) console.log(chalk.green('Done!'));
+	    });
     });
 
 program.on('--help', function () {
@@ -110,7 +118,7 @@ program.on('--help', function () {
 
 program.parse(process.argv);
 
-if (program.args.length < 1 && program.options.length < 1) return program.help();
+if (program.args.length < 1 || program.options.length < 1) return program.help();
 
 function cssProcessor (css) {
 	return css !== 'false';
