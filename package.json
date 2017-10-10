@@ -1,6 +1,6 @@
 {
   "name": "iconfont-maker-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "This is a cli tool base on iconfont-maker",
   "main": "./bin/iconfont.js",
   "bin": {
