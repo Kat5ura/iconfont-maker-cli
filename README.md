@@ -36,6 +36,8 @@ Usage: iconfont make [from] [to] [options]
     -H, --html           Generate an html file for test
     -D, --html-dest <d>  Specify a custom destination for html file
     -t, --types <t>      Font types to generate, default is [woff2, woff, eot]
+    -o, --optimize          Enable svg optimization with svgo, default is true
+    -P, --svgo-plugins <l>  Plugins list for svgo, "plugin1,!plugin2", use "!" to turn off
     -h, --help           output usage information
 
   Examples:
